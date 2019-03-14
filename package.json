@@ -5,6 +5,7 @@
   "main": "index.html",
   "scripts": {
     "build": "NODE_ENV=production ./node_modules/.bin/parcel build index.html",
+    "now-build": "NODE_ENV=production ./node_modules/.bin/parcel build index.html",
     "start": "./node_modules/.bin/parcel index.html -p 3000"
   },
   "repository": {
