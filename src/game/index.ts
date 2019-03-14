@@ -1,4 +1,6 @@
-class Game {
+import {IGame} from "./game";
+
+class Game implements IGame {
     private readonly context: CanvasRenderingContext2D;
 
     private sceneWidth: number = 0;
@@ -9,17 +11,38 @@ class Game {
 
         this.sceneHeight = this.canvas.height;
         this.sceneWidth = this.canvas.width;
+
+        this.setEvents();
     }
 
-    update(): void {}
+    start(): void {
 
-    draw(): void {}
+    }
 
-    private keyDown(): void {}
+    stop(): void {
+    }
 
-    private keyUp(): void {}
+    private loop(): void {
 
-    private mouseEvent(): void {}
+    }
+
+    private update(): void {
+    }
+
+    private draw(): void {
+    }
+
+    private setEvents(): void {
+    }
+
+    private keyDown(): void {
+    }
+
+    private keyUp(): void {
+    }
+
+    private mouseEvent(): void {
+    }
 }
 
 export default Game;
