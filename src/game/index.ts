@@ -75,7 +75,6 @@ class Game implements IGame {
     private setEvents(): void {
         document.addEventListener("keydown", this.keyDownHandler, false);
         document.addEventListener("keyup", this.keyUpHandler, false);
-        // document.addEventListener("mousemove", mouseMoveHandler, false);
     }
 
     private keyDownHandler = (e: KeyboardEvent): void => {
@@ -92,9 +91,6 @@ class Game implements IGame {
         } else if(e.key === KEYBOARD.Left || e.key === KEYBOARD.ArrowLeft) {
             this.pressedKey.Left = false;
         }
-    };
-
-    private mouseEvent = (): void => {
     };
 }
 
