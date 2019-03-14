@@ -1,6 +1,7 @@
 import {IGame, ILevel, IGameObject, Color, Key, PressedKey} from "./game";
 import Paddle from "./paddle";
 import Level from "./level";
+import Ball from "./ball";
 
 const COLOR: Color = {
     PADDLE: '#b58900',
@@ -24,6 +25,7 @@ class Game implements IGame {
 
     private Level: ILevel = null;
     private Paddle: IGameObject = null;
+    private Ball: IGameObject = null;
 
     private pressedKey: PressedKey = {
         Right: false,
@@ -38,6 +40,7 @@ class Game implements IGame {
 
         this.Level = new Level(this.sceneWidth, this.sceneHeight);
         this.Paddle = new Paddle(this.Level.paddleStartPosition.x, this.Level.paddleStartPosition.y, COLOR.PADDLE);
+        this.Ball = new Ball(this.Level.ballStartPosition.x, this.Level.ballStartPosition.y, COLOR.BALL);
 
         this.setEvents();
     }
@@ -70,6 +73,7 @@ class Game implements IGame {
         this.context.clearRect(0 , 0, this.canvas.width, this.canvas.height);
 
         this.Paddle.draw(this.context);
+        this.Ball.draw(this.context);
     }
 
     private setEvents(): void {

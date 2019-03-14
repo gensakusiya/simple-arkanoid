@@ -11,6 +11,7 @@ export interface ILevel {
     paddleSpeed: number;
 
     paddleStartPosition: Position;
+    ballStartPosition: Position;
 
     next(): void;
 }

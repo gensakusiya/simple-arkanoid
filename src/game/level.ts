@@ -9,15 +9,23 @@ class Level implements ILevel {
     paddleSpeed: number = 7;
 
     paddleStartPosition: Position = null;
+    ballStartPosition: Position = null;
 
     constructor(sceneWidth: number, sceneHeight: number) {
         const paddleX: number = (sceneWidth - Paddle.WIDTH) / 2;
         const paddleY: number = sceneHeight - (Paddle.HEIGHT * 2);
 
+        const ballX: number = sceneWidth / 2;
+        const ballY: number = sceneHeight - 30;
+
         this.paddleStartPosition = {
             x: paddleX,
             y: paddleY
-        }
+        };
+        this.ballStartPosition = {
+            x: ballX,
+            y: ballY
+        };
     }
 
     next(): void {
