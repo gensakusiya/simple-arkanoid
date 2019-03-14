@@ -6,6 +6,7 @@ class Level implements ILevel {
     score: number = 0;
     lives: number = 3;
     speed: number = 1;
+    paddleSpeed: number = 7;
 
     paddleStartPosition: Position = null;
 

@@ -59,10 +59,10 @@ class Game implements IGame {
     }
 
     private update(): void {
-        if(this.pressedKey.Right) {
-            this.Paddle.updatePosition({ x: this.Paddle.x+7, y: 0});
-        } else if(this.pressedKey.Left) {
-            this.Paddle.updatePosition({ x: this.Paddle.x-7, y: 0});
+        if(this.pressedKey.Right && this.Paddle.x < this.sceneWidth-Paddle.WIDTH) {
+            this.Paddle.updatePosition({ x: this.Paddle.x+this.Level.paddleSpeed });
+        } else if(this.pressedKey.Left && this.Paddle.x > 0) {
+            this.Paddle.updatePosition({ x: this.Paddle.x-this.Level.paddleSpeed });
         }
     }
 

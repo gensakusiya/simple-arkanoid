@@ -8,6 +8,7 @@ export interface ILevel {
     score: number;
     lives: number;
     speed: number;
+    paddleSpeed: number;
 
     paddleStartPosition: Position;
 
@@ -24,8 +25,8 @@ interface IGameObject {
 }
 
 export type Position = {
-    x: number;
-    y: number;
+    x?: number;
+    y?: number;
 }
 
 export type Color = {
