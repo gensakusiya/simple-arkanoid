@@ -9,6 +9,8 @@ export interface ILevel {
     lives: number;
     speed: number;
 
+    paddleStartPosition: Position;
+
     next(): void;
 }
 
@@ -30,4 +32,17 @@ export type Color = {
     PADDLE: string;
     BALL: string;
     BRICK: string;
+}
+
+export type Key = {
+    Right: string;
+    Left: string;
+    ArrowRight: string;
+    ArrowLeft: string;
+    Space: string;
+}
+
+export type PressedKey = {
+    Right: boolean;
+    Left: boolean;
 }

@@ -23,6 +23,7 @@ class Paddle implements IGameObject {
     }
 
     updatePosition(position: Position): void {
+        this.x = position.x;
     }
 }
 
