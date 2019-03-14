@@ -1,7 +1,12 @@
-import {IGameObject, Position} from "./game";
+import {IGameObject, Position, Step} from "./game";
 
 class Ball implements IGameObject {
     static RADIUS: number = 10;
+
+    step: Step = {
+        dx: 2,
+        dy: -2
+    };
 
     x: number = 0;
     y: number = 0;

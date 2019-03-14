@@ -20,6 +20,7 @@ interface IGameObject {
     x: number;
     y: number;
     color: string;
+    step: Step;
 
     draw(ctx: CanvasRenderingContext2D): void;
     updatePosition(position: Position): void;
@@ -47,4 +48,9 @@ export type Key = {
 export type PressedKey = {
     Right: boolean;
     Left: boolean;
+}
+
+export type Step = {
+    dx: number,
+    dy: number
 }

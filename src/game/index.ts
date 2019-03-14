@@ -1,4 +1,4 @@
-import {IGame, ILevel, IGameObject, Color, Key, PressedKey} from "./game";
+import {IGame, ILevel, IGameObject, Position, Color, Key, PressedKey} from "./game";
 import Paddle from "./paddle";
 import Level from "./level";
 import Ball from "./ball";
@@ -63,10 +63,24 @@ class Game implements IGame {
 
     private update(): void {
         if(this.pressedKey.Right && this.Paddle.x < this.sceneWidth-Paddle.WIDTH) {
-            this.Paddle.updatePosition({ x: this.Paddle.x+this.Level.paddleSpeed });
+            this.Paddle.updatePosition({ x: this.Paddle.x+this.Paddle.step.dx });
         } else if(this.pressedKey.Left && this.Paddle.x > 0) {
-            this.Paddle.updatePosition({ x: this.Paddle.x-this.Level.paddleSpeed });
+            this.Paddle.updatePosition({ x: this.Paddle.x-this.Paddle.step.dx });
         }
+
+        const ballMove: Position = {
+            x: this.Ball.x+(this.Ball.step.dx*this.Level.speed),
+            y: this.Ball.y+(this.Ball.step.dy*this.Level.speed)
+        };
+
+        if (ballMove.x > this.canvas.width - Ball.RADIUS || ballMove.x < Ball.RADIUS) {
+            this.Ball.step.dx = -this.Ball.step.dx;
+        }
+        if (ballMove.y < Ball.RADIUS || ballMove.y > this.canvas.height - Ball.RADIUS) {
+            this.Ball.step.dy = -this.Ball.step.dy;
+        }
+
+        this.Ball.updatePosition(ballMove);
     }
 
     private draw(): void {
