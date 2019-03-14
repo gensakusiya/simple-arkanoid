@@ -7,7 +7,8 @@ import Brick from "./brick";
 const COLOR: Color = {
     PADDLE: '#b58900',
     BALL: '#d33682',
-    BRICK: '#b58900'
+    BRICK: '#b58900',
+    TEXT: '#268bd2'
 };
 
 const KEYBOARD: Key = {
@@ -68,12 +69,18 @@ class Game implements IGame {
 
     private loop(): void {
         this.update();
-        this.draw();
 
-        requestAnimationFrame(() => this.loop());
+        if (this.Level.lives > 0 && this.Level.score !== this.Bricks.length) {
+            this.draw();
+            requestAnimationFrame(() => this.loop());
+        } else {
+            const message = this.Level.score === this.Bricks.length ? 'YOU WIN, CONGRATULATIONS!' : 'GAME OVER';
+            alert(message);
+            window.location.reload();
+        }
     }
 
-    private update(): void {
+    private update(): boolean {
         if(this.pressedKey.Right && this.Paddle.x < this.sceneWidth-Paddle.WIDTH) {
             this.Paddle.updatePosition({ x: this.Paddle.x+this.Paddle.step.dx });
         } else if(this.pressedKey.Left && this.Paddle.x > 0) {
@@ -94,16 +101,22 @@ class Game implements IGame {
             if (this.Paddle.x < ballMove.x+Ball.RADIUS && this.Paddle.x+Paddle.WIDTH > ballMove.x) {
                 this.Ball.step.dy = -this.Ball.step.dy;
             } else {
-                // todo: restart level with minus life
-                this.Ball.step.dy = -this.Ball.step.dy;
-                ballMove = {
-                    ...this.Level.ballStartPosition
-                };
+                this.Level.lives--;
+
+                if (this.Level.lives > 0) {
+                    ballMove = {
+                        ...this.Level.ballStartPosition
+                    };
+                    this.Ball.step.dy = -this.Ball.step.dy;
+                } else {
+                    return false;
+                }
             }
         }
 
         this.Ball.updatePosition(ballMove);
         this.collisionDetection();
+        return true;
     }
 
     private draw(): void {
@@ -117,6 +130,13 @@ class Game implements IGame {
             }
         });
 
+        // todo: move to text component
+        this.context.font = "16px Arial";
+        this.context.fillStyle = COLOR.TEXT;
+        this.context.fillText(`Lives: ${this.Level.lives}`, this.sceneWidth-65, 20);
+        this.context.font = "16px Arial";
+        this.context.fillStyle = COLOR.TEXT;
+        this.context.fillText(`Score: ${this.Level.score}`, 8, 20);
     }
 
     private setEvents(): void {

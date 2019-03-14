@@ -13,6 +13,13 @@ export interface ILevel {
     paddleStartPosition: Position;
     ballStartPosition: Position;
 
+    brickPadding: number;
+    brickOffsetTop: number;
+    brickOffsetLeft: number;
+
+    rowCount: number;
+    columnCount: number;
+
     next(): void;
 }
 
@@ -20,7 +27,8 @@ interface IGameObject {
     x: number;
     y: number;
     color: string;
-    step: Step;
+    step?: Step;
+    status?: boolean;
 
     draw(ctx: CanvasRenderingContext2D): void;
     updatePosition(position: Position): void;
@@ -35,6 +43,7 @@ export type Color = {
     PADDLE: string;
     BALL: string;
     BRICK: string;
+    TEXT: string;
 }
 
 export type Key = {
