@@ -2,9 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Simple Arkanoid</title>
+
+    <style>
+        * { padding: 0; margin: 0; }
+        html, body { height: 100%; }
+        canvas { background: #f1f1f1; display: block; margin: 0 auto; }
+
+        .game { height: 100%; display: flex; align-items: center; justify-content: center; }
+    </style>
 </head>
 <body>
-$END$
+    <div class="game">
+        <canvas id="scene" width="480" height="420"></canvas>
+    </div>
+    <script src="game/index.ts"></script>
 </body>
 </html>
