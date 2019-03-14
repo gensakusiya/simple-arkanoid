@@ -8,6 +8,13 @@ class Level implements ILevel {
     speed: number = 1;
     paddleSpeed: number = 1;
 
+    rowCount: number = 3;
+    columnCount: number = 5;
+
+    brickPadding: number = 10;
+    brickOffsetLeft: number = 30;
+    brickOffsetTop: number = 30;
+
     paddleStartPosition: Position = null;
     ballStartPosition: Position = null;
 

@@ -2,6 +2,7 @@ import {IGame, ILevel, IGameObject, Position, Color, Key, PressedKey} from "./ga
 import Paddle from "./paddle";
 import Level from "./level";
 import Ball from "./ball";
+import Brick from "./brick";
 
 const COLOR: Color = {
     PADDLE: '#b58900',
@@ -26,6 +27,7 @@ class Game implements IGame {
     private Level: ILevel = null;
     private Paddle: IGameObject = null;
     private Ball: IGameObject = null;
+    private Bricks: Array<IGameObject> = null;
 
     private pressedKey: PressedKey = {
         Right: false,
@@ -41,6 +43,16 @@ class Game implements IGame {
         this.Level = new Level(this.sceneWidth, this.sceneHeight);
         this.Paddle = new Paddle(this.Level.paddleStartPosition.x, this.Level.paddleStartPosition.y, COLOR.PADDLE);
         this.Ball = new Ball(this.Level.ballStartPosition.x, this.Level.ballStartPosition.y, COLOR.BALL);
+        this.Bricks = [];
+
+        for (let column = 0; column < this.Level.columnCount; column++) {
+            for (let row = 0; row < this.Level.rowCount; row++) {
+                const brickX = (column*(Brick.WIDTH+this.Level.brickPadding))+this.Level.brickOffsetLeft;
+                const brickY = (row*(Brick.HEIGHT+this.Level.brickPadding))+this.Level.brickOffsetTop;
+
+                this.Bricks.push(new Brick(brickX, brickY, COLOR.BRICK));
+            }
+        }
 
         this.setEvents();
     }
@@ -68,19 +80,30 @@ class Game implements IGame {
             this.Paddle.updatePosition({ x: this.Paddle.x-this.Paddle.step.dx });
         }
 
-        const ballMove: Position = {
+        let ballMove: Position = {
             x: this.Ball.x+(this.Ball.step.dx*this.Level.speed),
             y: this.Ball.y+(this.Ball.step.dy*this.Level.speed)
         };
 
-        if (ballMove.x > this.canvas.width - Ball.RADIUS || ballMove.x < Ball.RADIUS) {
+        if (ballMove.x > this.canvas.width-Ball.RADIUS || ballMove.x < Ball.RADIUS) {
             this.Ball.step.dx = -this.Ball.step.dx;
         }
-        if (ballMove.y < Ball.RADIUS || ballMove.y > this.canvas.height - Ball.RADIUS) {
+        if (ballMove.y < Ball.RADIUS || ballMove.y > this.canvas.height-Ball.RADIUS) {
             this.Ball.step.dy = -this.Ball.step.dy;
+        } else if (ballMove.y+Ball.RADIUS > this.Paddle.y) {
+            if (this.Paddle.x < ballMove.x+Ball.RADIUS && this.Paddle.x+Paddle.WIDTH > ballMove.x) {
+                this.Ball.step.dy = -this.Ball.step.dy;
+            } else {
+                // todo: restart level with minus life
+                this.Ball.step.dy = -this.Ball.step.dy;
+                ballMove = {
+                    ...this.Level.ballStartPosition
+                };
+            }
         }
 
         this.Ball.updatePosition(ballMove);
+        this.collisionDetection();
     }
 
     private draw(): void {
@@ -88,6 +111,12 @@ class Game implements IGame {
 
         this.Paddle.draw(this.context);
         this.Ball.draw(this.context);
+        this.Bricks.forEach((brick: IGameObject) => {
+            if (brick.status) {
+                brick.draw(this.context);
+            }
+        });
+
     }
 
     private setEvents(): void {
@@ -108,6 +137,19 @@ class Game implements IGame {
             this.pressedKey.Right = false;
         } else if(e.key === KEYBOARD.Left || e.key === KEYBOARD.ArrowLeft) {
             this.pressedKey.Left = false;
+        }
+    };
+
+    private collisionDetection = (): void => {
+        for (let i = 0; i < this.Bricks.length; i++) {
+            const brick: IGameObject = this.Bricks[i];
+            if (brick.status
+                && this.Ball.x > brick.x && this.Ball.x < brick.x+Brick.WIDTH
+                && this.Ball.y > brick.y && this.Ball.y < brick.y+Brick.HEIGHT) {
+                brick.status = false;
+                this.Ball.step.dy = -this.Ball.step.dy;
+                this.Level.score++;
+            }
         }
     };
 }
