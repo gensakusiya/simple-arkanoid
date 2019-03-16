@@ -1,4 +1,4 @@
-import {IGameObject, Position} from "./game";
+import {IGameObject} from "./game";
 
 class Brick implements IGameObject {
     static WIDTH = 75;
@@ -21,9 +21,6 @@ class Brick implements IGameObject {
         ctx.fillStyle = this.color;
         ctx.fill();
         ctx.closePath();
-    }
-
-    updatePosition(position: Position): void {
     }
 }
 

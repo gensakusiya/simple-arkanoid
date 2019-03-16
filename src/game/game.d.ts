@@ -31,7 +31,7 @@ interface IGameObject {
     status?: boolean;
 
     draw(ctx: CanvasRenderingContext2D): void;
-    updatePosition(position: Position): void;
+    updatePosition?(position: Position): void;
 }
 
 export type Position = {
