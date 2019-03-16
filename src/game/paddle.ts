@@ -1,10 +1,10 @@
-import {IGameObject, Position, Step} from "./game";
+import {IGameObject, TPosition, TStep} from "./game";
 
 class Paddle implements IGameObject {
     static WIDTH: number = 80;
     static HEIGHT: number = 10;
 
-    step: Step = {
+    step: TStep = {
         dx: 7,
         dy: 0
     };
@@ -27,7 +27,7 @@ class Paddle implements IGameObject {
         ctx.closePath();
     }
 
-    updatePosition(position: Position): void {
+    updatePosition(position: TPosition): void {
         this.x = position.x;
     }
 }

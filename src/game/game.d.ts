@@ -10,8 +10,8 @@ export interface ILevel {
     speed: number;
     paddleSpeed: number;
 
-    paddleStartPosition: Position;
-    ballStartPosition: Position;
+    paddleStartPosition: TPosition;
+    ballStartPosition: TPosition;
 
     brickPadding: number;
     brickOffsetTop: number;
@@ -27,26 +27,26 @@ interface IGameObject {
     x: number;
     y: number;
     color: string;
-    step?: Step;
+    step?: TStep;
     status?: boolean;
 
     draw(ctx: CanvasRenderingContext2D): void;
-    updatePosition?(position: Position): void;
+    updatePosition?(position: TPosition): void;
 }
 
-export type Position = {
+export type TPosition = {
     x?: number;
     y?: number;
 }
 
-export type Color = {
+export type TColor = {
     PADDLE: string;
     BALL: string;
     BRICK: string;
     TEXT: string;
 }
 
-export type Key = {
+export type TKey = {
     Right: string;
     Left: string;
     ArrowRight: string;
@@ -54,12 +54,12 @@ export type Key = {
     Space: string;
 }
 
-export type PressedKey = {
+export type TPressedKey = {
     Right: boolean;
     Left: boolean;
 }
 
-export type Step = {
+export type TStep = {
     dx: number,
     dy: number
 }

@@ -1,9 +1,9 @@
-import {IGameObject, Position, Step} from "./game";
+import {IGameObject, TPosition, TStep} from "./game";
 
 class Ball implements IGameObject {
     static RADIUS: number = 10;
 
-    step: Step = {
+    step: TStep = {
         dx: 2,
         dy: -2
     };
@@ -26,7 +26,7 @@ class Ball implements IGameObject {
         ctx.closePath();
     }
 
-    updatePosition(position: Position): void {
+    updatePosition(position: TPosition): void {
         this.x = position.x;
         this.y = position.y;
     }

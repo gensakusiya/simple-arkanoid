@@ -1,4 +1,4 @@
-import {ILevel, Position} from "./game";
+import {ILevel, TPosition} from "./game";
 import Paddle from "./paddle";
 
 class Level implements ILevel {
@@ -15,8 +15,8 @@ class Level implements ILevel {
     brickOffsetLeft: number = 30;
     brickOffsetTop: number = 30;
 
-    paddleStartPosition: Position = null;
-    ballStartPosition: Position = null;
+    paddleStartPosition: TPosition = null;
+    ballStartPosition: TPosition = null;
 
     constructor(sceneWidth: number, sceneHeight: number) {
         const paddleX: number = (sceneWidth - Paddle.WIDTH) / 2;

@@ -1,17 +1,17 @@
-import {IGame, ILevel, IGameObject, Position, Color, Key, PressedKey} from "./game";
+import {IGame, ILevel, IGameObject, TPosition, TColor, TKey, TPressedKey} from "./game";
 import Paddle from "./paddle";
 import Level from "./level";
 import Ball from "./ball";
 import Brick from "./brick";
 
-const COLOR: Color = {
+const COLOR: TColor = {
     PADDLE: '#b58900',
     BALL: '#d33682',
     BRICK: '#b58900',
     TEXT: '#268bd2'
 };
 
-const KEYBOARD: Key = {
+const KEYBOARD: TKey = {
     Right: 'Right',
     Left: 'Left',
     ArrowRight: 'ArrowRight',
@@ -30,7 +30,7 @@ class Game implements IGame {
     private Ball: IGameObject = null;
     private Bricks: Array<IGameObject> = null;
 
-    private pressedKey: PressedKey = {
+    private pressedKey: TPressedKey = {
         Right: false,
         Left: false
     };
@@ -87,7 +87,7 @@ class Game implements IGame {
             this.Paddle.updatePosition({ x: this.Paddle.x-this.Paddle.step.dx });
         }
 
-        let ballMove: Position = {
+        let ballMove: TPosition = {
             x: this.Ball.x+(this.Ball.step.dx*this.Level.speed),
             y: this.Ball.y+(this.Ball.step.dy*this.Level.speed)
         };
