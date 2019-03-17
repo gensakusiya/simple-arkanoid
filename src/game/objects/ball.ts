@@ -1,7 +1,9 @@
-import {IGameObject, TPosition, TStep} from "../game";
+import {TStep} from "../game";
 import {circle} from '../painter';
 
-class Ball implements IGameObject {
+import GameObject from './main';
+
+class Ball extends GameObject {
     static RADIUS: number = 10;
 
     step: TStep = {
@@ -9,23 +11,8 @@ class Ball implements IGameObject {
         dy: -2
     };
 
-    x: number = 0;
-    y: number = 0;
-    color: string = '';
-
-    constructor(x: number = 0, y: number = 0, color: string = '') {
-        this.x = x;
-        this.y = y;
-        this.color = color;
-    }
-
     draw(ctx: CanvasRenderingContext2D): void {
         circle(ctx, this.x, this.y, Ball.RADIUS, this.color);
-    }
-
-    updatePosition(position: TPosition): void {
-        this.x = position.x;
-        this.y = position.y;
     }
 }
 

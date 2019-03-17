@@ -1,7 +1,9 @@
-import {IGameObject, TPosition, TStep} from "../game";
+import {TStep} from "../game";
 import {rectangle} from '../painter';
 
-class Paddle implements IGameObject {
+import GameObject from './main';
+
+class Paddle extends GameObject {
     static WIDTH: number = 80;
     static HEIGHT: number = 10;
 
@@ -10,22 +12,8 @@ class Paddle implements IGameObject {
         dy: 0
     };
 
-    x: number = 0;
-    y: number = 0;
-    color: string = '';
-
-    constructor(x: number = 0, y: number = 0, color: string = '') {
-        this.x = x;
-        this.y = y;
-        this.color = color;
-    }
-
     draw(ctx: CanvasRenderingContext2D): void {
         rectangle(ctx, this.x, this.y, Paddle.WIDTH, Paddle.HEIGHT, this.color);
-    }
-
-    updatePosition(position: TPosition): void {
-        this.x = position.x;
     }
 }
 

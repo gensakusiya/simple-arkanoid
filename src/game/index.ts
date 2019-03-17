@@ -1,8 +1,9 @@
 import {IGame, ILevel, IGameObject, TPosition, TColor, TKey, TPressedKey} from "./game";
 import Paddle from "./objects/paddle";
-import Level from "./level";
 import Ball from "./objects/ball";
 import Brick from "./objects/brick";
+import Level from "./level";
+import GameObject from "./objects/main";
 
 const COLOR: TColor = {
     PADDLE: '#b58900',
@@ -26,9 +27,9 @@ class Game implements IGame {
     private readonly sceneHeight: number = 0;
 
     private Level: ILevel = null;
-    private Paddle: IGameObject = null;
-    private Ball: IGameObject = null;
-    private Bricks: Array<IGameObject> = null;
+    private Paddle: GameObject = null;
+    private Ball: GameObject = null;
+    private Bricks: Array<GameObject> = null;
 
     private pressedKey: TPressedKey = {
         Right: false,
