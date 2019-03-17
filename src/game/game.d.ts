@@ -34,6 +34,15 @@ export interface IGameObject {
     updatePosition?(position: TPosition): void;
 }
 
+export interface IUIElement {
+    x: number;
+    y: number;
+    color: string;
+    text: string;
+
+    draw(ctx: CanvasRenderingContext2D): void;
+}
+
 export type TPosition = {
     x?: number;
     y?: number;

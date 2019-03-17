@@ -2,8 +2,9 @@ import {IGame, ILevel, IGameObject, TPosition, TColor, TKey, TPressedKey} from "
 import Paddle from "./objects/paddle";
 import Ball from "./objects/ball";
 import Brick from "./objects/brick";
+import Text from "./objects/text";
+import GameObject, {UIElement} from "./objects/main";
 import Level from "./level";
-import GameObject from "./objects/main";
 
 const COLOR: TColor = {
     PADDLE: '#b58900',
@@ -30,6 +31,8 @@ class Game implements IGame {
     private Paddle: GameObject = null;
     private Ball: GameObject = null;
     private Bricks: Array<GameObject> = null;
+    private ScoreText: UIElement = null;
+    private LivesText: UIElement = null;
 
     private pressedKey: TPressedKey = {
         Right: false,
@@ -45,6 +48,8 @@ class Game implements IGame {
         this.Level = new Level(this.sceneWidth, this.sceneHeight);
         this.Paddle = new Paddle(this.Level.paddleStartPosition.x, this.Level.paddleStartPosition.y, COLOR.PADDLE);
         this.Ball = new Ball(this.Level.ballStartPosition.x, this.Level.ballStartPosition.y, COLOR.BALL);
+        this.ScoreText = new Text(this.sceneWidth-65, 20, COLOR.TEXT);
+        this.LivesText = new Text(8, 20, COLOR.TEXT);
         this.Bricks = [];
 
         for (let column = 0; column < this.Level.columnCount; column++) {
@@ -117,6 +122,9 @@ class Game implements IGame {
 
         this.Ball.updatePosition(ballMove);
         this.collisionDetection();
+
+        this.LivesText.text = `Lives: ${this.Level.lives}`;
+        this.ScoreText.text = `Score: ${this.Level.score}`;
         return true;
     }
 
@@ -131,13 +139,8 @@ class Game implements IGame {
             }
         });
 
-        // todo: move to text component
-        this.context.font = "16px Arial";
-        this.context.fillStyle = COLOR.TEXT;
-        this.context.fillText(`Lives: ${this.Level.lives}`, this.sceneWidth-65, 20);
-        this.context.font = "16px Arial";
-        this.context.fillStyle = COLOR.TEXT;
-        this.context.fillText(`Score: ${this.Level.score}`, 8, 20);
+        this.ScoreText.draw(this.context);
+        this.LivesText.draw(this.context);
     }
 
     private setEvents(): void {

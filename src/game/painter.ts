@@ -13,3 +13,9 @@ export function circle(canvas: CanvasRenderingContext2D, x: number, y: number, r
     canvas.fill();
     canvas.closePath();
 }
+
+export function text(canvas: CanvasRenderingContext2D, x: number, y: number, text: string, color: string): void {
+    canvas.font = "16px Arial";
+    canvas.fillStyle = color;
+    canvas.fillText(text, x, y);
+}
