@@ -1,5 +1,5 @@
-import {IGameObject} from "./game";
-import {rectangle} from './painter';
+import {IGameObject} from "../game";
+import {rectangle} from '../painter';
 
 class Brick implements IGameObject {
     static WIDTH = 75;

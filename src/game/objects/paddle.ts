@@ -1,12 +1,13 @@
-import {IGameObject, TPosition, TStep} from "./game";
-import {circle} from './painter';
+import {IGameObject, TPosition, TStep} from "../game";
+import {rectangle} from '../painter';
 
-class Ball implements IGameObject {
-    static RADIUS: number = 10;
+class Paddle implements IGameObject {
+    static WIDTH: number = 80;
+    static HEIGHT: number = 10;
 
     step: TStep = {
-        dx: 2,
-        dy: -2
+        dx: 7,
+        dy: 0
     };
 
     x: number = 0;
@@ -20,13 +21,12 @@ class Ball implements IGameObject {
     }
 
     draw(ctx: CanvasRenderingContext2D): void {
-        circle(ctx, this.x, this.y, Ball.RADIUS, this.color);
+        rectangle(ctx, this.x, this.y, Paddle.WIDTH, Paddle.HEIGHT, this.color);
     }
 
     updatePosition(position: TPosition): void {
         this.x = position.x;
-        this.y = position.y;
     }
 }
 
-export default Ball;
+export default Paddle;

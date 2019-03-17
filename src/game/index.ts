@@ -1,8 +1,8 @@
 import {IGame, ILevel, IGameObject, TPosition, TColor, TKey, TPressedKey} from "./game";
-import Paddle from "./paddle";
+import Paddle from "./objects/paddle";
 import Level from "./level";
-import Ball from "./ball";
-import Brick from "./brick";
+import Ball from "./objects/ball";
+import Brick from "./objects/brick";
 
 const COLOR: TColor = {
     PADDLE: '#b58900',

@@ -1,5 +1,5 @@
 import {ILevel, TPosition} from "./game";
-import Paddle from "./paddle";
+import Paddle from "./objects/paddle";
 
 class Level implements ILevel {
     level: number = 1;
