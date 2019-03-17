@@ -1,4 +1,5 @@
 import {IGameObject} from "./game";
+import {rectangle} from './painter';
 
 class Brick implements IGameObject {
     static WIDTH = 75;
@@ -16,11 +17,7 @@ class Brick implements IGameObject {
     }
 
     draw(ctx: CanvasRenderingContext2D): void {
-        ctx.beginPath();
-        ctx.rect(this.x, this.y, Brick.WIDTH, Brick.HEIGHT);
-        ctx.fillStyle = this.color;
-        ctx.fill();
-        ctx.closePath();
+        rectangle(ctx, this.x, this.y, Brick.WIDTH, Brick.HEIGHT, this.color);
     }
 }
 

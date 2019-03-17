@@ -1,4 +1,5 @@
 import {IGameObject, TPosition, TStep} from "./game";
+import {circle} from './painter';
 
 class Ball implements IGameObject {
     static RADIUS: number = 10;
@@ -19,11 +20,7 @@ class Ball implements IGameObject {
     }
 
     draw(ctx: CanvasRenderingContext2D): void {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, Ball.RADIUS, 0, Math.PI*2);
-        ctx.fillStyle = this.color;
-        ctx.fill();
-        ctx.closePath();
+        circle(ctx, this.x, this.y, Ball.RADIUS, this.color);
     }
 
     updatePosition(position: TPosition): void {

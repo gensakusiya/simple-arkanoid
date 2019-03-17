@@ -23,7 +23,7 @@ export interface ILevel {
     next(): void;
 }
 
-interface IGameObject {
+export interface IGameObject {
     x: number;
     y: number;
     color: string;

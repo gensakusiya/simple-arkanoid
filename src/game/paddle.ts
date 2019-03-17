@@ -1,4 +1,5 @@
 import {IGameObject, TPosition, TStep} from "./game";
+import {rectangle} from './painter';
 
 class Paddle implements IGameObject {
     static WIDTH: number = 80;
@@ -20,11 +21,7 @@ class Paddle implements IGameObject {
     }
 
     draw(ctx: CanvasRenderingContext2D): void {
-        ctx.beginPath();
-        ctx.rect(this.x, this.y, Paddle.WIDTH, Paddle.HEIGHT);
-        ctx.fillStyle = this.color;
-        ctx.fill();
-        ctx.closePath();
+        rectangle(ctx, this.x, this.y, Paddle.WIDTH, Paddle.HEIGHT, this.color);
     }
 
     updatePosition(position: TPosition): void {
